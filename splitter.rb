@@ -9,7 +9,7 @@ class Splitter
 
     @primary_data   = read_data_from( @primary_csv )
     @secondary_data = read_data_from( @secondary_csv )
-    @new_data       = get_new_data
+    @new_data       = @primary_data - @secondary_data
 
     write_to_new_file
   end
@@ -22,10 +22,6 @@ class Splitter
     end
 
     return data
-  end
-
-  def get_new_data
-    return @primary_data - @secondary_data
   end
 
   def write_to_new_file
