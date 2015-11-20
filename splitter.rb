@@ -16,12 +16,12 @@ class Splitter
   end
 
   def read_data_from_files
-    CSV.foreach( @primary_csv ) do |row|
-      @primary_data << row[0] unless row[0] == 'Email'
+    CSV.foreach( @primary_csv, { headers: true } ) do |row|
+      @primary_data << row[0]
     end
 
-    CSV.foreach( @secondary_csv ) do |row|
-      @secondary_data << row[0] unless row[0] == 'Email'
+    CSV.foreach( @secondary_csv, { headers: true } ) do |row|
+      @secondary_data << row[0]
     end
   end
 
