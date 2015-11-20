@@ -9,9 +9,9 @@ class Splitter
 
     @primary_data   = read_data_from( @primary_csv )
     @secondary_data = read_data_from( @secondary_csv )
-    @new_data       = []
+    @new_data       = run_comparison
 
-    run_comparison
+    write_to_new_file
   end
 
   def read_data_from( csv_file )
@@ -25,8 +25,7 @@ class Splitter
   end
 
   def run_comparison
-    @new_data = @primary_data - @secondary_data
-    write_to_new_file
+    return @primary_data - @secondary_data
   end
 
   def write_to_new_file
