@@ -2,27 +2,26 @@ require 'csv'
 
 class Splitter
 
-  def initialize primary_csv, secondary_csv, new_csv
+  def initialize( primary_csv, secondary_csv, new_csv )
     @primary_csv   = primary_csv
     @secondary_csv = secondary_csv
     @new_csv       = new_csv
 
-    @primary_data   = []
-    @secondary_data = []
+    @primary_data   = read_data_from( @primary_csv )
+    @secondary_data = read_data_from( @secondary_csv )
     @new_data       = []
 
-    read_data_from_files
     run_comparison
   end
 
-  def read_data_from_files
-    CSV.foreach( @primary_csv, { headers: true } ) do |row|
-      @primary_data << row[0]
+  def read_data_from( csv_file )
+    data = []
+
+    CSV.foreach( csv_file, { headers: true } ) do |row|
+      data << row[0]
     end
 
-    CSV.foreach( @secondary_csv, { headers: true } ) do |row|
-      @secondary_data << row[0]
-    end
+    return data
   end
 
   def run_comparison
