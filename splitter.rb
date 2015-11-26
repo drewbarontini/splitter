@@ -3,14 +3,16 @@ require 'csv'
 class Splitter
 
   def initialize( primary_csv, secondary_csv, new_csv )
-    @new_csv = new_csv
+    @new_csv        = new_csv
+    @primary_data   = read_data_from( primary_csv )
+    @secondary_data = read_data_from( secondary_csv )
 
-    primary_data   = read_data_from( primary_csv )
-    secondary_data = read_data_from( secondary_csv )
-
-    @new_data = primary_data - secondary_data
-
+    calculate_new_data
     write_to_new_file
+  end
+
+  def calculate_new_data
+    @new_data = @primary_data - @secondary_data
   end
 
   def read_data_from( csv_file )
